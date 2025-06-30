@@ -76,6 +76,7 @@ class User{
             }
         }
 
+        //Salvo l'oggetto da rimuovere dalla lista una volta che l'ArrayList non è più ciclato con il for each
         if (libroDaRestituire != null) {
             libriInPrestito.remove(libroDaRestituire);
             libroDaRestituire.isAvailable = true;
