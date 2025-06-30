@@ -37,6 +37,7 @@ class User{
         this.libriInPrestito = new ArrayList<>();
     }
 
+    // Il metodo prendiInPrestito() controlla se l'utente ha già tre libri, altrimenti fa aggiungere un altro libro a quelli già presi in prestito
     public void prendiInPrestito(Book libro) {
         if(libriInPrestito.size() < 3){
             libriInPrestito.add(libro);
@@ -45,10 +46,7 @@ class User{
         }
     }
 
-    public void restituisciLibro(Book libro) {
-        libriInPrestito.remove(libro);
-    }
-
+    //Il metodo showUserBook() mostra tutti i libri di un utente se ne ha
     void showUserBook(){
         if(libriInPrestito.size() > 0){
             for(Book book : libriInPrestito){
@@ -67,9 +65,11 @@ class User{
         }
     }
 
+    //Il metodo returnBook() rimuove il libro da quelli presi in prestito dall'utente mettendolo disponibile nella biblioteca
     void returnBook(String title){
         for(Book libro : libriInPrestito) {
             if (libro.title.equalsIgnoreCase(title)) {
+                libriInPrestito.remove(libro);
                 libro.isAvailable = true;
                 System.out.println("Grazie per averci restituito " + title + " speriamo ti sia piaciuto. Arrivederci!");
             }
@@ -81,10 +81,12 @@ class User{
 public class Library {
     ArrayList<Book> libri = new ArrayList<>();
 
+    //Per aggiungere il libro alla libreria
     void addBook(Book book){
         libri.add(book);
     }
 
+    //Visuallizzare tutti i libri nella libreria
     void displayBooks(){
         System.out.println("\n========== Elenco dei Libri ==========");
         if (libri.isEmpty()) {
@@ -98,6 +100,7 @@ public class Library {
         System.out.println("======================================");
     }
 
+    //Restituire un libro e assegnarlo a true
     void borrowBook(String title){
         for(Book libro : libri) {
             if (libro.title.equalsIgnoreCase(title)) {
@@ -108,6 +111,7 @@ public class Library {
         System.out.println("Mi dispiace il libro richiesto non è attualmente disponibile.");
     }
 
+    //Mostra solo i libri disponibile nella libreria
     void showAvailableBooks(){
         for(Book book : libri){
             if(book.isAvailable == true){
@@ -118,6 +122,7 @@ public class Library {
         }
     }
 
+    //Permette di controllare se un libro è disponibile tramite il titolo o l'autore
     void searchBook(String keyword){
         for(Book libro : libri){
             if (libro.title.equalsIgnoreCase(keyword) || libro.author.equalsIgnoreCase(keyword)){
@@ -131,13 +136,27 @@ public class Library {
     public static void main(String[] args) {
         User dennis = new User("Dennis");
         Library library = new Library();
+
+        //Creo più oggetti Book
         Book b1 = new Book("Harry Potter e la pietra filosofale", "J. K. Rowling", true);
+        Book b2 = new Book("Diario di una schiappa", "Jeff Kinney", true);
+        Book b3 = new Book("Geronimo Stilton: Il mistero dell’occhio di smeraldo", "Geronimo Stilton", true);
+        Book b4 = new Book("Il Signore degli Anelli", "J. R. R. Tolkien", true);
+        Book b5 = new Book("1984", "George Orwell", true);
 
         b1.displayBookInfo();
+
+        //Aggiungo i libri alla libreria
         library.addBook(b1);
-        //library.displayBooks();
-        //library.borrowBook("Diario di una schiappa");
+        library.addBook(b2);
+        library.addBook(b3);
+        library.addBook(b4);
+        library.addBook(b5);
+
+        //Utilizzo i metodi definiti nella class User per interagire con i libri della libreria
         dennis.prendiInPrestito(b1);
+        dennis.showUserBook();
+        dennis.returnBook("Harry Potter e la pietra filosofale");
         dennis.showUserBook();
     }
 
