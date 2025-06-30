@@ -58,7 +58,7 @@ class User{
                 System.out.println("Disponibile : " + (book.isAvailable ? "Sì" : "No"));
             }
         }else {
-            System.out.println("======================================");
+            System.out.println("\n======================================");
             System.out.println("           Libri di " + name );
             System.out.println("======================================");
             System.out.println("Al momento " + name + " non possiede libri");
@@ -67,14 +67,23 @@ class User{
 
     //Il metodo returnBook() rimuove il libro da quelli presi in prestito dall'utente mettendolo disponibile nella biblioteca
     void returnBook(String title){
-        for(Book libro : libriInPrestito) {
+        Book libroDaRestituire = null;
+
+        for (Book libro : libriInPrestito) {
             if (libro.title.equalsIgnoreCase(title)) {
-                libriInPrestito.remove(libro);
-                libro.isAvailable = true;
-                System.out.println("Grazie per averci restituito " + title + " speriamo ti sia piaciuto. Arrivederci!");
+                libroDaRestituire = libro;
+                break;
             }
         }
-        System.out.println("Questo libro non lo hai preso da questo biblioteca.");
+
+        if (libroDaRestituire != null) {
+            libriInPrestito.remove(libroDaRestituire);
+            libroDaRestituire.isAvailable = true;
+            System.out.println("\n======================================");
+            System.out.println("Grazie per averci restituito " + title + " speriamo ti sia piaciuto. Arrivederci!");
+        } else {
+            System.out.println("Questo libro non lo hai preso da questa biblioteca.");
+        }
     }
 }
 
@@ -93,7 +102,7 @@ public class Library {
             System.out.println("Nessun libro presente nella libreria.");
         } else {
             for (int i = 0; i < libri.size(); i++) {
-                System.out.println("LIBRO #" + (i + 1));
+                System.out.println("\nLIBRO #" + (i + 1));
                 libri.get(i).displayBookInfo();
             }
         }
@@ -152,6 +161,8 @@ public class Library {
         library.addBook(b3);
         library.addBook(b4);
         library.addBook(b5);
+
+        library.displayBooks();
 
         //Utilizzo i metodi definiti nella class User per interagire con i libri della libreria
         dennis.prendiInPrestito(b1);
