@@ -25,6 +25,7 @@ class Aereo {
         return numeroPosti;
     }
 
+    // Impedisco l'inserimento di un numero di posti non valido
     public void setNumeroPosti(int numeroPosti) {
         if (numeroPosti > 0) {
             this.numeroPosti = numeroPosti;
@@ -41,6 +42,7 @@ class Aereo {
         this.codice = codice;
     }
 
+    // Metodo per stampare tutte le informazioni dell'aereo
     public void stampaInfo() {
         System.out.println("Aereo - Modello: " + modello + ", Posti: " + numeroPosti + ", Codice: " + codice);
     }
@@ -77,6 +79,7 @@ class Pilota {
         return oreVolo;
     }
 
+    // Impedisco l'inserimento di un valore non valido per le ore di volo
     public void setOreVolo(int oreVolo) {
         if (oreVolo > 0) {
             this.oreVolo = oreVolo;
@@ -85,6 +88,7 @@ class Pilota {
         }
     }
 
+    // Metodo per stampare tutte le informazioni del pilota
     public void stampaInfo() {
         System.out.println("Pilota - Nome: " + nome + ", Brevetto: " + numeroBrevetto + ", Ore di volo: " + oreVolo);
     }
@@ -101,36 +105,44 @@ class CompagniaAerea {
         this.piloti = new ArrayList<>();
     }
 
+    // Aggiungo un aereo all'elenco della flotta
     public void aggiungiAereo(Aereo aereo) {
         flotta.add(aereo);
     }
 
+    // Aggiungo un pilota all'elenco dei piloti
     public void aggiungiPilota(Pilota pilota) {
         piloti.add(pilota);
     }
 
+    // Stampo tutte le informazioni relative alla compagnia aerea
     public void stampaInformazioni() {
         System.out.println("Compagnia Aerea: " + nome);
+
         System.out.println("\n--- Flotta Aerei ---");
         for (Aereo a : flotta) {
-            a.stampaInfo();
+            a.stampaInfo(); // Stampo info per ogni aereo
         }
 
         System.out.println("\n--- Piloti ---");
         for (Pilota p : piloti) {
-            p.stampaInfo();
+            p.stampaInfo(); // Stampo info per ogni pilota
         }
     }
 }
 
+// Classe principale per eseguire il programma
 public class FlottaAerea {
 
     public static void main(String[] args) {
-        CompagniaAerea compagnia = new CompagniaAerea("SkyFly Airlines");
+        // Creo una nuova compagnia aerea
+        CompagniaAerea compagnia = new CompagniaAerea("FidoFly Airlines");
 
+        // Creo due aerei e li aggiungo alla compagnia
         Aereo a1 = new Aereo("Boeing 737", 180, "SF737-01");
         Aereo a2 = new Aereo("Airbus A320", 160, "SF320-02");
 
+        // Creo due piloti e li aggiungo alla compagnia
         Pilota p1 = new Pilota("Marco Rossi", "BRV12345", 1200);
         Pilota p2 = new Pilota("Anna Bianchi", "BRV67890", 900);
 
@@ -140,6 +152,7 @@ public class FlottaAerea {
         compagnia.aggiungiPilota(p1);
         compagnia.aggiungiPilota(p2);
 
+        // Stampo le informazioni finali della compagnia
         compagnia.stampaInformazioni();
     }
 
