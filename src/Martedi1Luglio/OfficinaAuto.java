@@ -1,4 +1,4 @@
-package Martedi31Giugno;
+package Martedi1Luglio;
 
 import java.util.ArrayList;
 import java.util.Scanner;
