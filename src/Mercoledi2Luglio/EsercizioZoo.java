@@ -59,9 +59,11 @@ public class EsercizioZoo {
                         System.out.print("Inserisci il nome del cane: ");
                         String nomeCane = scanner.nextLine();
                         System.out.print("Inserisci l'età del cane: ");
+                        //Uso il try per verificare che venga inserito il tipo di dato corretto per l'età degli animali
                         try {
                             int etaCane = Integer.parseInt(scanner.nextLine());
                             animali.add(new Cane(nomeCane, etaCane));
+                        //In caso vegna inserito il tipo di dato sbagliato viene gestita l'eccezione NumberFormatException
                         } catch (NumberFormatException e) {
                             System.out.println("Età non valida. Inserisci un numero intero.");
                         }
