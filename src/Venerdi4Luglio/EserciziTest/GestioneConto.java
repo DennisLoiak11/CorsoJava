@@ -48,7 +48,6 @@ public class GestioneConto {
         conto.deposita(500.0); // saldo ora è 1500
         // Prelevo 200 euro
         conto.preleva(200.0); // saldo ora è 1300
-        // Stampo il saldo finale
         System.out.println("Conto intestato a: " + conto.getTitolare());
         System.out.println("Numero conto: " + conto.getNumeroConto());
         System.out.println("Saldo finale: " + conto.getSaldo() + " euro");
