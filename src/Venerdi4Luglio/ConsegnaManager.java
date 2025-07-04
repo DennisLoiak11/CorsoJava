@@ -11,7 +11,7 @@ abstract class VeicoloConsegna{
         this.caricoMassimo = caricoMassimo;
     }
 
-    //Metodo astratto della classe astratta che andrà implementato nella classe che estende VeicoloConsegna
+    //Metodo astratto della classe astratta VeicoloConsegna che andrà implementato nella classe che estende VeicoloConsegna
     abstract void consegnaPacco(String destinazione);
 
     void stampaInfo(){
