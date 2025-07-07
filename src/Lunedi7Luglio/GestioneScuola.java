@@ -118,6 +118,7 @@ public class GestioneScuola {
                             String nomeStudente = scanner.nextLine();
                             System.out.print("Inserisci l'età dello studente: ");
                             int etaStudente = scanner.nextInt();
+                            scanner.nextLine();
                             System.out.print("Inserisci la classe dello studente: ");
                             String classe = scanner.nextLine();
                             persona = new Studente(nomeStudente, etaStudente, classe);
@@ -127,6 +128,7 @@ public class GestioneScuola {
                             String nomeDocente = scanner.nextLine();
                             System.out.print("Inserisci l'età del docente: ");
                             int etaDocente = scanner.nextInt();
+                            scanner.nextLine();
                             System.out.print("Inserisci la materia insegnata dal docente: ");
                             String materia = scanner.nextLine();
                             persona = new Studente(nomeDocente, etaDocente, materia);
