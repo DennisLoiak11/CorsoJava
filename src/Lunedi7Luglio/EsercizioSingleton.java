@@ -1,52 +1,91 @@
 package Lunedi7Luglio;
 
-class DatabaseManager {
-    // variabile per l'istanza Singleton
-    private static DatabaseManager instance;
+import java.util.Scanner;
 
-    // contatore delle connessioni
+class DatabaseManager {
+    // Variabile per il ritorno dell'istanza Singleton della classe DatabaseManager
+    private static DatabaseManager instance = null;
+
+    // Contatore delle connessioni
     private int connectionCount = 0;
 
-    // costruttore privato per sovrascrivere il costruttore di default di java e impedire la creazione di istanze al di fuori della classe
+    // Costruttore privato per sovrascrivere il costruttore default di java e impedire la creazione di istanze della classe al di fuori di essa
     private DatabaseManager() {
-        // Costruttore privato per impedire l'istanziazione diretta
     }
 
-    // metodo statico per ottenere l'istanza
+    // Metodo statico per ottenere l'istanza della classe DatabaseManager
     public static DatabaseManager getInstance() {
         if (instance == null) {
             instance = new DatabaseManager();
+            System.out.println("Nuova istanza creata.");
+        } else {
+            System.out.println("Istanza già esistente.");
         }
         return instance;
     }
 
-    // metodo per simulare la connessione al database
+    // Metodo per simulare la cancellazione dell'istanza
+    public static void deleteInstance() {
+        if (instance != null) {
+            instance = null;
+            System.out.println("Istanza eliminata.");
+        } else {
+            System.out.println("Nessuna istanza da eliminare.");
+        }
+    }
+
+    // Simula una connessione al database
     public void connect() {
         connectionCount++;
         System.out.println("Connessione stabilita. Connessioni attive: " + connectionCount);
     }
 
-    // metodo per restituisce il numero totale di connessioni
+    // Ritorna il numero totale di connessioni
     public int getConnectionCount() {
         return connectionCount;
     }
 }
 
+
 public class EsercizioSingleton {
     public static void main(String[] args) {
-        // due oggetti ma stessa istanza della classe
-        DatabaseManager db1 = DatabaseManager.getInstance();
-        DatabaseManager db2 = DatabaseManager.getInstance();
+        Scanner scanner = new Scanner(System.in);
+        DatabaseManager manager = null;
+        int scelta;
 
-        // verifica che l'istanza degli oggetti sia la stessa
-        System.out.println("db1 == db2? " + (db1 == db2));  // deve stampare true
+        do {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Crea un nuovo oggetto DatabaseManager");
+            System.out.println("2. Usa l'oggetto per una connessione");
+            System.out.println("3. Cancella l'oggetto");
+            System.out.println("0. Esci");
+            System.out.print("Scelta: ");
+            scelta = scanner.nextInt();
 
-        // richiamo i metodi per la simulazione delle connessioni
-        db1.connect();
-        db2.connect();
-        db1.connect();
+            switch (scelta) {
+                case 1:
+                    manager = DatabaseManager.getInstance();
+                    break;
+                case 2:
+                    if (manager != null) {
+                        manager.connect();
+                    } else {
+                        System.out.println("Errore: devi prima creare l'oggetto.");
+                    }
+                    break;
+                case 3:
+                    DatabaseManager.deleteInstance();
+                    manager = null;
+                    break;
+                case 0:
+                    System.out.println("Uscita dal programma.");
+                    break;
+                default:
+                    System.out.println("Scelta non valida.");
+            }
 
-        // stampa totale connessioni
-        System.out.println("Numero totale di connessioni: " + db1.getConnectionCount());
+        } while (scelta != 0);
+
+        scanner.close();
     }
 }
